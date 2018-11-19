@@ -1,6 +1,8 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
-import app from '../src/app';
+// import chai from 'chai';
+// import chaiHttp from 'chai-http';
+// import app from '../src/app';
+const chai = require('chai');
+const chaHtt
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -28,9 +30,10 @@ describe("app test", ()=>{
     });
 
     describe(`GET /api/v1/parcels/id`, ()=>{
-        it('should get a specific parcel', (done)=>{
+        it('should return an empty array', (done)=>{
             chai.request(app).get("/api/v1/parcels/22222").end((err, res)=>{
-                expect(res).to.be.equal(undefined);
+                // console.log(JSON.parse(res.text).parcel.length);
+                expect(JSON.parse(res.text).parcel.length).to.be.equal(0);
                 done();
             });
             
