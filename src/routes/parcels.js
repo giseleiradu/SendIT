@@ -11,18 +11,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = Number(req.params.id);
   const parcel = [];
 
   orders.forEach((order) => {
     if (order.id === id) {
       parcel.push(order);
+      res.status(200).json({
+        parcel,
+      });
     }
   });
 
-  res.status(200).json({
-    parcel,
-  });
+ 
   req.setTimeout(500);
 });
 
