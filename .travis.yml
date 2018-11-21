@@ -7,5 +7,5 @@ cache:
 before_scrip:
   - npm install --save-dev coveralls
 script:
-  # - npm run coveralls
+  - npm run coveralls
   - npm run test

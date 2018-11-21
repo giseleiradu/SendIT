@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register test/*.api.test.js",
-    "cover": "istanbul cover _mocha -- --compilers js:babel-register test/*.api.test.js",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec -- --compilers js:babel-register test/*.api.test.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "start": "nodemon src/server.js --exec babel-node --presets env",
     "build": "babel src/ --presets babel-preset-env --out-dir dist/"
