@@ -41,7 +41,8 @@ describe("app test", ()=>{
     });
 
 
-    describe("PUT /api/v1/parcels/id/status", ()=>{
+    describe("PUT /api/v1/parcels/id/cancel", ()=>{
+    describe("Cancel test", ()=>{
             it(`should change the specified order's status`, (done)=>{
                 chai.request(app).put("/api/v1/parcels/7/cancel").end((err, res)=>{
                     expect(res.status).to.equal(200);
