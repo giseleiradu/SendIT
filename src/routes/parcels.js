@@ -17,13 +17,12 @@ router.get('/:id', (req, res) => {
   orders.forEach((order) => {
     if (order.id === id) {
       parcel.push(order);
-      res.status(200).json({
-        parcel,
-      });
     }
   });
 
- 
+  res.status(200).json({
+    parcel,
+  });
   req.setTimeout(500);
 });
 

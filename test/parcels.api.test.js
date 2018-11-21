@@ -32,6 +32,7 @@ describe("app test", ()=>{
     describe(`GET /api/v1/parcels/id`, ()=>{
         it('should return an empty array', (done)=>{
             chai.request(app).get("/api/v1/parcels/22222").end((err, res)=>{
+                // console.log(res.text);
                 expect(JSON.parse(res.text).parcel.length).to.be.equal(0);
                 done();
             });
