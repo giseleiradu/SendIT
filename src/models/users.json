@@ -1,0 +1,31 @@
+[
+	{
+		"client_id": "user0U0",
+		"names": "Basil Fitzgerald",
+		"uname": "BaFitz",
+		"password": "bafitz",
+		"email": "placerat@eunulla.org",
+		"phone": "(078) 603-1393",
+		"location": "Mozambique"
+		
+	},
+	{
+		"client_id": "user3Z7",
+		"names": "Ingrid Larsen",
+		"uname": "Langrid",
+		"password": "langrid",
+		"email": "orci@Etiambibendumfermentum.edu",
+		"phone": "(078) 501-0266",
+		"location": "China"
+	},
+
+	{
+		"client_id": "user 8X5",
+        "names": "Wang Romero",
+        "uname": "Rowang",
+		"password": "rowang",
+		"email": "Vestibulum.ut@maurisblandit.ca",
+		"phone": "(078) 934-2880",
+		"location": "Switzerland"
+	}
+]
