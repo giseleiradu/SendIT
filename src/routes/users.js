@@ -5,17 +5,24 @@ import User from "../controllers/User";
 
 const router = express.Router();
 
-router.post("/sign-up", (req, res) => {
+router.get("/", (req, res) => {
   const userObj = new User(users);
-  const newUser = {
-    names: "ada adaoe",
+  // const { uId } = req.params;
+
+  res.status(200).json({
+    allUsers: userObj.getAll()
+  });
+});
+
+router.post("/sign-in", (req, res) => {
+  const userObj = new User(users);
+  const user = {
     uname: "BaFitz",
-    password: "bafitz",
-    email: "placerat@eunulla.org",
-    phone: "(078) 603-1393",
-    location: "Mozambique"
+    password: "bafitz"
   };
-  const message = userObj.signUp(newUser);
+
+  const message = userObj.signIn(user);
+
   res.status(200).json({
     message
   });
