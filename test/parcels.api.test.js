@@ -27,7 +27,6 @@ describe("app test", ()=>{
                 expect(res.status).to.equal(200);
                 done();
             });
-            
         });
     });
 
@@ -40,4 +39,28 @@ describe("app test", ()=>{
             });
         });
     });
-});
+
+
+    describe("PUT /api/v1/parcels/id/status", ()=>{
+            it(`should change the specified order's status`, (done)=>{
+                chai.request(app).put("/api/v1/parcels/7/cancel").end((err, res)=>{
+                    expect(res.status).to.equal(200);
+    
+                    done();
+                });
+                
+            });
+        });
+    });
+
+
+    describe("POST /api/v1/parcels/", ()=>{
+        it(`should add a percel to the parcels' list`, (done)=>{
+            chai.request(app).post("/api/v1/parcels/").end((err, res)=>{
+                expect(res.status).to.equal(200);
+                
+                done();
+            });
+            
+        });
+    });
