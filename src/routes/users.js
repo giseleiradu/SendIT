@@ -14,6 +14,31 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/sign-up", (req, res) => {
+  const userObj = new User(users);
+  const newUser = {
+    names: "ada adaoe",
+    uname: "BaFitz",
+    password: "",
+    email: "placerat@eunulla.org",
+    phone: "(078) 603-1393",
+    location: "Mozambique"
+  };
+  const message = userObj.signUp(newUser);
+  res.status(200).json({
+    message
+  });
+});
+
+router.get("/", (req, res) => {
+  const userObj = new User(users);
+  // const { uId } = req.params;
+
+  res.status(200).json({
+    allUsers: userObj.getAll()
+  });
+});
+
 router.post("/sign-in", (req, res) => {
   const userObj = new User(users);
   const user = {
