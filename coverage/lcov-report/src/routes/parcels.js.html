@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.59% </span>
+        <span class="strong">94.12% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>24/34</span>
+        <span class='fraction'>32/34</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>5/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.43% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/7</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">72.73% </span>
+        <span class="strong">93.94% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>24/33</span>
+        <span class='fraction'>31/33</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -170,25 +170,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,8 +197,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -249,8 +249,8 @@ router.put('/:id/cancel', (req, res) =&gt; {
 });
 &nbsp;
 &nbsp;
-function <span class="fstat-no" title="function not covered" >validateOrder(order) {</span>
-  const schema = <span class="cstat-no" title="statement not covered" >{</span>
+function validateOrder(order) {
+  const schema = {
     id: joi.number().required(),
     client_id: joi.string(),
     title: joi.string().min(3).max(60).required(),
@@ -259,16 +259,16 @@ function <span class="fstat-no" title="function not covered" >validateOrder(orde
     date: joi.date(),
     state: joi.string().required(),
   };
-<span class="cstat-no" title="statement not covered" >  return joi.validate(order, schema);</span>
+  return joi.validate(order, schema);
 }
 &nbsp;
-router.post('/', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; <span class="cstat-no" title="statement not covered" >{</span>
-  const { err } = <span class="cstat-no" title="statement not covered" >validateOrder(req.body);</span>
-<span class="cstat-no" title="statement not covered" >  if (err) {</span>
+router.post('/', (req, res) =&gt; {
+  const { err } = validateOrder(req.body);
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >    res.status(400).send(err.details[0].message);</span>
 <span class="cstat-no" title="statement not covered" >    return;</span>
   }
-  const order = <span class="cstat-no" title="statement not covered" >{</span>
+  const order = {
     id: orders.length + 1,
     client_id: req.body.client_id,
     type: req.body.type,
@@ -277,8 +277,8 @@ router.post('/', <span class="fstat-no" title="function not covered" >(</span>re
     date: req.body.date,
     status: req.body.status,
   };
-<span class="cstat-no" title="statement not covered" >  orders.push(order);</span>
-<span class="cstat-no" title="statement not covered" >  res.send(orders);</span>
+  orders.push(order);
+  res.send(orders);
 });
 &nbsp;
 &nbsp;
@@ -289,7 +289,7 @@ export default router;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 21 2018 15:30:40 GMT+0200 (South Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 21 2018 19:50:57 GMT+0200 (South Africa Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

@@ -30,15 +30,6 @@ router.post("/sign-up", (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
-  const userObj = new User(users);
-  // const { uId } = req.params;
-
-  res.status(200).json({
-    allUsers: userObj.getAll()
-  });
-});
-
 router.post("/sign-in", (req, res) => {
   const userObj = new User(users);
   const user = {

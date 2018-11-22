@@ -45,3 +45,15 @@ describe("User login routes test", ()=>{
         });
     });
 });
+
+describe("Fetch users routes test", ()=>{
+    describe(`GET /api/v1/users/`, ()=>{
+        it('should get all the users of stored', (done)=>{
+            chai.request(app).get("/api/v1/users/").end((err, res)=>{
+                expect(res.status).to.equal(200);
+                done();
+            });
+            
+        });
+    });
+});
