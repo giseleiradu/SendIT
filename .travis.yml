@@ -6,6 +6,9 @@ cache:
     - "node_modules"
 before_scrip:
   - npm install --save-dev coveralls
+  - npm install codeclimate-test-reporter istanbul -g
 script:
   - npm run coveralls
   - npm run test
+afrer_script:
+  - codeclimate-test-reporter < ./coverage/lcov.info

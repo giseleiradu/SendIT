@@ -10,7 +10,8 @@ export default class User {
   }
 
   signUp(reqBody) {
-    if (reqBody.names && reqBody.uname && reqBody.password && reqBody.phone) {
+    if (String(reqBody.names) && reqBody.uname && reqBody.password && reqBody.phone) {
+      is
       this.user = {
         client_id: this.users.length + 1,
         names: reqBody.names,
