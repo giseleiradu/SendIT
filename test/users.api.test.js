@@ -27,8 +27,7 @@ describe("User sign-up routes test", ()=>{
         it('should create an account on the application', (done)=>{
             chai.request(app).post("/api/v1/users/sign-up").end((err, res)=>{
                 expect(res.status).to.equal(200);
-                // expect(res.text).to.equal("Successfully Registered!");
-                // expect(JSON.parse(res.text).message).to.equal("Please enter the required information.");
+                
                 done();
             });
             
