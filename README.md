@@ -1,5 +1,6 @@
 ![alt text](https://travis-ci.com/giseleiradu/sendIT.svg?branch=develop)
 [![Coverage Status](https://coveralls.io/repos/github/giseleiradu/sendIT/badge.svg?branch=develop)](https://coveralls.io/github/giseleiradu/sendIT?branch=develop)
+<a href="https://codeclimate.com/github/giseleiradu/sendIT/maintainability"><img src="https://api.codeclimate.com/v1/badges/ef5ccd25506b08a55073/maintainability" /></a>
 
 # SendIT
 
