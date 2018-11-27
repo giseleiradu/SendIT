@@ -12,7 +12,7 @@ const config = {
 
 const pool = new pg.Pool(config);
 pool.on('connect', () => {
-  // eslint-disable-next-line no-console
+
   console.log('Database connection successful');
 });
 const create = () => {
@@ -43,17 +43,14 @@ const create = () => {
                   )`;
   pool.query(`${usersTable}; ${adminsTable}; ${parcelsTable}`)
     .then((res) => {
-      // eslint-disable-next-line no-console
       console.log(res);
       pool.end();
     })
     .catch((err) => {
-      // eslint-disable-next-line no-console
       console.log(err);
       pool.end();
     });
   pool.on('remove', () => {
-    // eslint-disable-next-line no-console
     console.log('Removed');
     process.exit(0);
   });
