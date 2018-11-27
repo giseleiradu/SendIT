@@ -1,14 +1,16 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
+import bodyParser from 'body-parser';
 
 // const chai = require('chai');
 // const chaHtt = require('chai-http');
 // const app = require('../src/app');
 
 const { expect } = chai;
-
+const {assert} = chai;
 chai.use(chaiHttp);
+chai.use(bodyParser);
 
 describe("Fetch users routes test", ()=>{
     describe(`GET /api/v1/users/`, ()=>{
@@ -25,7 +27,12 @@ describe("Fetch users routes test", ()=>{
 describe("User sign-up routes test", ()=>{
     describe(`POST /api/v1/users/sign-up`, ()=>{
         it('should create an account on the application', (done)=>{
-            chai.request(app).post("/api/v1/users/sign-up").end((err, res)=>{
+            chai.request(app).post("/api/v1/users/sign-up").end((err,  res)=>{
+                // expect.typeOf(req.body.uname, 'string');
+                // assert.typeOf(req.body.names, 'string');
+                // assert.typeOf(req.body.uname, 'string');
+                // expect(JSON.parse(req.text).names).to.be.a('string');
+               
                 expect(res.status).to.equal(200);
                 
                 done();

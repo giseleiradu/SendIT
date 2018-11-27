@@ -20,9 +20,9 @@ function validateUser(newUser) {
     client_id: joi.number(),
     names: joi.string().min(3).max(60).required(),
     uname: joi.string().required(),
-    password: joi.string().min(10).max(1000),
-    email: joi.date(),
-    phone: joi.string().required(),
+    password: joi.string().min(10).max(10),
+    email: joi.string(),
+    phone: joi.number().max(10).required(),
     email: joi.string().required(),
   };
   return joi.validate(newUser, schema);
@@ -44,6 +44,15 @@ router.post("/sign-up", (req, res) => {
     phone: req.body.phone,
     location: req.body.location
   };
+  // const newUser = {
+  //   names: 'gisele iradukunda',
+  //   uname: 'gisele',
+  //   password: 'gisele',
+  //   email: 'gisele',
+  //   phone: '0789770946',
+  //   location: 'Kigali'
+  // };
+
   const message = userObj.signUp(newUser);
   res.status(200).json({
     message
@@ -53,8 +62,8 @@ router.post("/sign-up", (req, res) => {
 router.post("/sign-in", (req, res) => {
   const userObj = new User(users);
   const user = {
-    uname: "BaFitz",
-    password: "bafitz"
+    uname: req.body.uname,
+    password: req.body.password
   };
 
   const message = userObj.signIn(user);

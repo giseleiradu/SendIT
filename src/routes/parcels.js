@@ -47,22 +47,24 @@ router.put('/:id/cancel', (req, res) => {
 function validateOrder(order) {
   const schema = {
     id: joi.number().required(),
-    client_id: joi.string(),
+    client_id: joi.string().required(),
     title: joi.string().min(3).max(60).required(),
     destination: joi.string().required(),
-    comment: joi.string().min(10).max(1000),
-    date: joi.date(),
+    comment: joi.string().min(10).max(1000).required(),
+    date: joi.string().required(),
     state: joi.string().required(),
   };
   return joi.validate(order, schema);
 }
 
 router.post('/', (req, res) => {
+  // console.log(req.body);
+
   const { err } = validateOrder(req.body);
   if (err) {
     res.status(400).send(err.details[0].message);
     return;
-  }
+  } else{
   const order = {
     id: orders.length + 1,
     client_id: req.body.client_id,
@@ -73,7 +75,9 @@ router.post('/', (req, res) => {
     status: req.body.status,
   };
   orders.push(order);
-  res.send(orders);
+  res.status(201).send(order);
+}
+  
 });
 
 
