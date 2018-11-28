@@ -50,7 +50,36 @@ class User{
     }
   }
 
-  
-  
+  static async signIn (req, res){
+    if(req.body.uname && req.body.password){
+      const qry = 'SELECT * FROM users WHERE uname = $1 AND password=$2';
+      const login = [
+        req.body.uname,
+        req.body.password
+      ];
+      try {
+        const {rows} = await db.query(qry, login);
+        if(rows.length > 0) {
+          return res.status(202).json({
+             user: {
+              names: rows[0].names,
+              uname: rows[0].uname,
+              phone: rows[0].phone,
+              email: rows[0].email,
+              location: rows[0].location,
+             }
+           });
+
+        } else{
+
+          return res.status(500).json({message:"User not found!"})
+        }
+      } catch (e) {
+        
+      }
+    } else {
+      return res.status(400).json({message:"Please enter the required information"})
+    } 
+}
 }
 export default User;

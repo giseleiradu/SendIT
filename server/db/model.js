@@ -45,6 +45,7 @@ const create = () => {
                     parcels(
                       id SERIAL PRIMARY KEY,
                       userId INT NOT NULL REFERENCES users(id),
+                      receiver VARCHAR(50) NOT NULL,
                       weight DECIMAL(9,2) NOT NULL,
                       location VARCHAR(100) NOT NULL,
                       destination VARCHAR(100) NOT NULL,

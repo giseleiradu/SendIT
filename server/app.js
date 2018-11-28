@@ -11,7 +11,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/api/v1/parcels', parcels);
+app.use('/api/v1/parcels', parcels);
 app.use('/api/v1/users', users);
 app.use((req, res, next)=>{
     next(httpErrors(404));
