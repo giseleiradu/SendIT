@@ -37,26 +37,18 @@ router.post("/sign-up", async (req, res) => {
 
   const userObj = new User();
   const newUser = {
-    names: req.body.name,
+    names: req.body.names,
     uname: req.body.uname,
     password: req.body.password,
     email: req.body.email,
     phone: req.body.phone,
     location: req.body.location
   };
-  // const newUser = {
-  //   names: 'gisele iradukunda',
-  //   uname: 'gisele',
-  //   password: 'gisele',
-  //   email: 'gisele',
-  //   phone: '0789770946',
-  //   location: 'Kigali'
-  // };
-
+  
   const createdUser = await userObj.signUp(newUser);
   
   res.status(200).json({
-    createdUser: newUser,
+    createdUser,
   });
 });
 

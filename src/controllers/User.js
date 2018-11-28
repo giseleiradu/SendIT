@@ -16,7 +16,7 @@ export default class User {
     if (reqBody.names && reqBody.uname && reqBody.password && reqBody.phone) {
       const qry = `INSERT INTO
                     users(names, uname, password, email, phone, location)
-                    VALUES($1, $2, $3, $4, $5, $6) `;
+                    VALUES($1, $2, $3, $4, $5, $6) returning id, uname, email, phone, location`;
 
       this.user = [
         reqBody.names,

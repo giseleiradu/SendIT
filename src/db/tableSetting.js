@@ -45,7 +45,7 @@ const create = () => {
                     destination VARCHAR(100) NOT NULL,
                     price DECIMAL(9,2) NOT NULL,
                     status VARCHAR(50),
-                    createdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                    createdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     updatedDate TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
                   )`;
   pool
