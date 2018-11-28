@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   });
 });
 
-function validateUser(newUser) {
+const validateUser = (newUser)=> {
   const schema = {
     client_id: joi.number(),
     names: joi.string().min(3).max(60).required(),
