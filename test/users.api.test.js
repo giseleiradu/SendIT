@@ -36,8 +36,7 @@ describe("User sign-up routes test", ()=>{
                 expect(res.status).to.equal(200);
                 
                 done();
-            });
-            
+            });         
         });
     });
 });
