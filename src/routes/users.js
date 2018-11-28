@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   });
 });
 
-function validateUser(newUser) {
+const validateUser = (newUser)=> {
   const schema = {
     client_id: joi.number(),
     names: joi.string().min(3).max(60).required(),
@@ -28,34 +28,27 @@ function validateUser(newUser) {
   return joi.validate(newUser, schema);
 }
 
-router.post("/sign-up", (req, res) => {
+router.post("/sign-up", async (req, res) => {
   const { err } = validateUser(req.body);
   if (err) {
     res.status(400).send(err.details[0].message);
     return;
   }
 
-  const userObj = new User(users);
+  const userObj = new User();
   const newUser = {
-    names: req.body.name,
+    names: req.body.names,
     uname: req.body.uname,
     password: req.body.password,
     email: req.body.email,
     phone: req.body.phone,
     location: req.body.location
   };
-  // const newUser = {
-  //   names: 'gisele iradukunda',
-  //   uname: 'gisele',
-  //   password: 'gisele',
-  //   email: 'gisele',
-  //   phone: '0789770946',
-  //   location: 'Kigali'
-  // };
-
-  const message = userObj.signUp(newUser);
+  
+  const createdUser = await userObj.signUp(newUser);
+  
   res.status(200).json({
-    message
+    createdUser,
   });
 });
 
