@@ -1,11 +1,13 @@
 import httpErrors from 'http-errors';
 import express from 'express';
 import bodyParser from 'body-parser';
+import logger from 'morgan';
 import parcels from './routes/parcels';
 import users from './routes/users';
 
 const app = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

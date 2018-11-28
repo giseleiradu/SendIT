@@ -28,14 +28,14 @@ function validateUser(newUser) {
   return joi.validate(newUser, schema);
 }
 
-router.post("/sign-up", (req, res) => {
+router.post("/sign-up", async (req, res) => {
   const { err } = validateUser(req.body);
   if (err) {
     res.status(400).send(err.details[0].message);
     return;
   }
 
-  const userObj = new User(users);
+  const userObj = new User();
   const newUser = {
     names: req.body.name,
     uname: req.body.uname,
@@ -53,9 +53,10 @@ router.post("/sign-up", (req, res) => {
   //   location: 'Kigali'
   // };
 
-  const message = userObj.signUp(newUser);
+  const createdUser = await userObj.signUp(newUser);
+  
   res.status(200).json({
-    message
+    createdUser: newUser,
   });
 });
 
