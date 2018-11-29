@@ -8,6 +8,6 @@ const router = express.Router();
 
 
 router.post('/signup', celebrate({body:userSchema}), User.signUp);
-router.post('/signin', User.signIn);
+router.post('/login', User.signIn);
 
 export default router;
