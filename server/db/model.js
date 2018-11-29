@@ -1,7 +1,3 @@
-// import Database from '.';
-// import Pool from 'pg';
-// import pool from './db';
-
 import pg from 'pg';
 import dotenv from 'dotenv';
 
@@ -25,29 +21,23 @@ const create = () => {
                     users(
                       id SERIAL PRIMARY KEY,
                       names VARCHAR(50) NOT NULL,
-                      uname VARCHAR(25) NOT NULL,
+                      uname VARCHAR(25) NOT NULL UNIQUE,
+                      role VARCHAR(10) NULL,
                       password VARCHAR(100) NOT NULL,
-                      email VARCHAR(50) NULL,
-                      phone VARCHAR(16) NOT NULL,
+                      email VARCHAR(50) NULL UNIQUE,
+                      phone VARCHAR(16) NOT NULL UNIQUE,
                       location TEXT NULL,
                       createdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-                    )`;
-  
-    const adminsTable = `CREATE TABLE IF NOT EXISTS 
-                    admins(
-                      id SERIAL PRIMARY KEY,
-                      names VARCHAR(50) NOT NULL,
-                      uname VARCHAR(25) NOT NULL,
-                      password VARCHAR(100) NOT NULL
                     )`;
   
     const parcelsTable = `CREATE TABLE IF NOT EXISTS 
                     parcels(
                       id SERIAL PRIMARY KEY,
                       userId INT NOT NULL REFERENCES users(id),
-                      receiver VARCHAR(50) NOT NULL,
+                      receiverEmail VARCHAR(50) NOT NULL,
                       weight DECIMAL(9,2) NOT NULL,
-                      location VARCHAR(100) NOT NULL,
+                      origin VARCHAR(100) NOT NULL,
+                      presentLocation VARCHAR(100) NOT NULL,
                       destination VARCHAR(100) NOT NULL,
                       price DECIMAL(9,2) NOT NULL,
                       status VARCHAR(50),

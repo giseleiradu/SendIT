@@ -1,9 +1,6 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../src/app";
-// const chai = require('chai');
-// const chaHtt = require('chai-http');
-// const app = require('../src/app');
 
 const { expect } = chai;
 
