@@ -1,6 +1,7 @@
 import db from "../db/db";
 
 export default class Parcel {
+
   static async getAll(req, res) {
     const { rows } = await db.query("SELECT * FROM parcels");
     if (rows.length) {
@@ -14,6 +15,8 @@ export default class Parcel {
       });
     }
   }
+
+
   static async getById(req, res) {
     const { rows } = await db.query("SELECT * FROM parcels WHERE id=$1", [
       req.params.parcelId
@@ -67,24 +70,10 @@ export default class Parcel {
           });
         }
     }
-
-    // const { rowCount } = await db.query("UPDATE parcels SET status=$1 WHERE id=$2", [req.body.status, req.params.parcelId]);
-    // const { rows } = await db.query("SELECT * FROM parcels WHERE id=$1", [req.params.parcelId]);
-    // if (rowCount > 0 ) {
-    //     return res.status(200).json({
-    //         status: "Successful",
-    //         parcels: rows[0]
-    //       });
-    //     } else {
-    //       return res.json({
-    //         message: "No orders founds"
-    //       });
-    //     }
   }
 
   static async createParcel(req, res) {
     if (
-      req.body.userid &&
       req.body.weight &&
       req.body.destination &&
       req.body.receiver
@@ -92,9 +81,9 @@ export default class Parcel {
       const qry = `INSERT INTO
         parcels(userid, receiver, weight, location, destination, price, status)
         VALUES($1, $2, $3, $4, $5, $6, $7) returning *`;
-
+        console.log(req.body);
       const parcel = [
-        req.body.userid,
+        req.user.id,
         req.body.receiver,
         req.body.weight,
         req.body.location,

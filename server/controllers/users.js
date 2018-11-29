@@ -1,15 +1,46 @@
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import db from '../db/db';
 import Helper from '../helper/helper';
 
+dotenv.config()
+
 class User {
 
-  static getAll(req, res) {
-    return res.status(200).json({
-      status: "Successful",
-      message: "All the users",
-      users
-    });
+  static async getAll(req, res) {
+    const { rows } = await db.query("SELECT * FROM users");
+    if (rows.length) {
+      return res.status(200).json({
+        status: "Successful",
+        users: rows
+      });
+    } else {
+      return res.json({
+        message: "No orders founds"
+      });
+    }
   }
+
+  static async getUserParcels(req, res) {
+    const {id} = req.params;
+    if(id !=req.user.id){
+      return res.status(401).json({
+        message: "Unauthorized access"
+      });
+    }
+    const { rows } = await db.query("SELECT * FROM parcels WHERE userid = $1", [id]);
+    if (rows.length) {
+      return res.status(200).json({
+        status: "Successful",
+        parcels: rows
+      });
+    } else {
+      return res.json({
+        message: "No orders founds"
+      });
+    }
+  }
+
 
   static async signUp(req, res) {
     if (req.body.names && req.body.uname && req.body.password && req.body.phone && req.body.email) {
@@ -31,15 +62,23 @@ class User {
         const { rows } = await db.query(qry, user);
 
         if (rows.length > 0) {
-          return res.status(201).json({ newUser: rows[0] });
+          const user = rows[0];
+          const token = jwt.sign({
+            id:user.id,
+            role: user.role
+          }, process.env.JWT_SECRET );
+          return res.status(201).json({
+            user,
+            token
+          });
         }
       } catch (e) {
+        console.log(e);
         return res
           .status(500)
           .json({ message: "Not successfully Registered!" });
          
         }  
-        // console.log(e);
     } else {
       return res
         .status(400)
@@ -55,16 +94,23 @@ class User {
       try {
         const { rows } = await db.query(qry, login);
         if (rows.length > 0) {
-          console.log("eeeee==============", Helper.hashPassword(req.body.password), '====', rows[0].password);
           if (Helper.verifyPassword(rows[0].password, req.body.password)) {
+            const user = {
+              id: rows[0].id,
+              names: rows[0].names,
+              uname: rows[0].uname,
+              role: rows[0].role,
+              phone: rows[0].phone,
+              email: rows[0].email,
+              location: rows[0].location
+            }
+            const token = jwt.sign({
+              id:user.id,
+              role: user.role
+            }, process.env.JWT_SECRET );
             return res.status(202).json({
-              user: {
-                names: rows[0].names,
-                uname: rows[0].uname,
-                phone: rows[0].phone,
-                email: rows[0].email,
-                location: rows[0].location
-              }
+              user,
+              token
             });
           } else {
             return res

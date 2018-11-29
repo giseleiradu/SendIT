@@ -13,7 +13,7 @@ describe("app test", () => {
         .request(app)
         .get("/api/v1/parcels")
         .end((err, res) => {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
 
           done();
         });
@@ -39,7 +39,6 @@ describe("app test", () => {
         .request(app)
         .get("/api/v1/parcels/22222")
         .end((err, res) => {
-          // console.log(res.text);
           expect(JSON.parse(res.text).parcel.length).to.be.equal(0);
           done();
         });
@@ -67,7 +66,7 @@ describe("app test", () => {
         .request(app)
         .post("/api/v1/parcels/")
         .end((err, res) => {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
 
           done();
         });
