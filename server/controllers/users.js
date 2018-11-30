@@ -7,19 +7,27 @@ dotenv.config()
 
 class User {
 
+
   static async getAll(req, res) {
-    const { rows } = await db.query("SELECT * FROM users");
-    if (rows.length) {
-      return res.status(200).json({
-        status: "Successful",
-        users: rows
-      });
-    } else {
-      return res.json({
-        message: "No orders founds"
-      });
+      const {id} = req.params;
+      if(id !=req.user.id){
+        return res.status(401).json({
+          message: "Unauthorized access"
+        });
+      }
+  
+      const { rows } = await db.query("SELECT * FROM users");
+      if (rows.length) {
+        return res.status(200).json({
+          status: "Successful",
+          users: rows
+        });
+      } else {
+        return res.json({
+          message: "No orders founds"
+        });
+      }
     }
-  }
 
   static async getUserParcels(req, res) {
     const {id} = req.params;
@@ -28,6 +36,7 @@ class User {
         message: "Unauthorized access"
       });
     }
+
     const { rows } = await db.query("SELECT * FROM parcels WHERE userid = $1", [id]);
     if (rows.length) {
       return res.status(200).json({
@@ -40,6 +49,29 @@ class User {
       });
     }
   }
+
+
+  static async getUserParcel(req, res) {
+    const {id} = req.params;
+    if(id !=req.user.id){
+      return res.status(401).json({
+        message: "Unauthorized access"
+      });
+    }
+
+    const { rows } = await db.query("SELECT * FROM parcels WHERE userid = $2 AND id = $1", [id], req.user.id);
+    if (rows.length) {
+      return res.status(200).json({
+        status: "Successful",
+        parcels: rows
+      });
+    } else {
+      return res.json({
+        message: "No orders founds"
+      });
+    }
+  }
+
 
 
   static async signUp(req, res) {
@@ -76,7 +108,7 @@ class User {
         console.log(e);
         return res
           .status(500)
-          .json({ message: "Not successfully Registered!" });
+          .json({ message: "Server under maintainance!" });
          
         }  
     } else {
@@ -120,7 +152,9 @@ class User {
         } else {
           return res.status(404).json({ message: "Bad request" });
         }
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       return res
         .status(400)
