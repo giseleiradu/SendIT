@@ -11,6 +11,6 @@ router.put('/:parcelId/destination', Parcel.updatePropertyById);
 
 // router.put('/:id/:parcelId/destinaton', authentication('user'), Parcel.updateDestination);
 router.put('/:parcelId/status', authentication('user'), Parcel.updatePropertyById);
-router.put('/:parcelId/currentLocation',  Parcel.updatePropertyById);
+router.put('/:parcelId/currentLocation',authentication('admin'),  Parcel.updatePropertyById);
 export default router;
 
